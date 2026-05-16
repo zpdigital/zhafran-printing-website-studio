@@ -62,9 +62,23 @@ async function loadCategories(){
 }
 
 function themeImage(item){
-  return item.thumbnail || item.image || item.cover || item.preview || item.photo || "assets/logo.jpg";
+  return item.thumbnail_url || 
+         item.thumbnailUrl || 
+         item.thumbnail || 
+         item.image_url || 
+         item.imageUrl || 
+         item.image || 
+         item.cover_url || 
+         item.coverUrl || 
+         item.cover || 
+         item.preview_url || 
+         item.previewUrl || 
+         item.preview || 
+         item.photo_url || 
+         item.photoUrl || 
+         item.photo || 
+         "";
 }
-
 function themeName(item){
   return item.name || item.title || "Tema Undangan Digital";
 }
@@ -87,7 +101,7 @@ function renderThemes(){
 
   themes.innerHTML = filtered.map(item => `
     <article class="theme-card reveal">
-      <img src="${themeImage(item)}" alt="${themeName(item)}" loading="lazy" onerror="this.src='assets/logo.jpg'">
+      <img src="${themeImage(item)}" alt="${themeName(item)}" loading="lazy" onerror="this.style.display='none'">
       <div class="theme-body">
         <span>${themeCategory(item)}</span>
         <h3>${themeName(item)}</h3>
