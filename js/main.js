@@ -1,39 +1,57 @@
-const productGrid = document.querySelector('#productGrid');
-const themeGrid = document.querySelector('#themeGrid');
-const navToggle = document.querySelector('.nav-toggle');
-const navMenu = document.querySelector('.nav-menu');
-const year = document.querySelector('#year');
-if(year) year.textContent = new Date().getFullYear();
-if(navToggle){ navToggle.addEventListener('click',()=>navMenu.classList.toggle('open')); }
-function renderProducts(){
-  if(!productGrid) return;
-  productGrid.innerHTML = products.map(p=>{
-    const link = p.page || waLink(p.name,p.price);
-    const target = p.page ? '' : 'target="_blank"';
-    const btnText = p.page ? 'Lihat Detail & Pesan' : 'Pesan Sekarang';
-    return `<article class="product-card reveal"><div class="product-img">${p.img}</div><span class="tag">${p.category}</span><h3>${p.name}</h3><div class="price">${p.price}</div><p>${p.desc}</p><div class="features">${p.features.map(f=>`<span>${f}</span>`).join('')}</div><a class="btn order-btn" href="${link}" ${target}>${btnText}</a></article>`;
-  }).join('');
+const baseUrl = "https://zp.webinvit.id";
+
+let nextPageUrl =
+baseUrl + "/seller/api/v1/products/websites?limit=12";
+
+const themeContainer =
+document.getElementById("themes");
+
+async function loadThemes(){
+
+try{
+
+const response =
+await fetch(nextPageUrl);
+
+const data =
+await response.json();
+
+data.data.forEach(item=>{
+
+const card = `
+<div class="theme-card">
+
+<img src="${item.thumbnail}" alt="${item.name}">
+
+<h3>${item.name}</h3>
+
+<p>${item.category?.name || "Tema Premium"}</p>
+
+<div class="price">
+Rp100.000
+</div>
+
+<a href="https://wa.me/6285343556117?text=Halo%20ZHAFRAN,%20Saya%20ingin%20pesan%20tema%20${encodeURIComponent(item.name)}"
+class="btn-order"
+target="_blank">
+
+Pesan Sekarang
+
+</a>
+
+</div>
+`;
+
+themeContainer.innerHTML += card;
+
+});
+
+}catch(err){
+
+console.log(err);
+
 }
-function renderThemes(filter='Semua'){
-  if(!themeGrid) return;
-  const list = filter==='Semua' ? themes : themes.filter(t=>t.cat===filter);
-  themeGrid.innerHTML = list.map(t=>`<article class="theme-card reveal"><div class="theme-img">${t.name}</div><h3>${t.name}</h3><p>${t.cat}</p><p>${t.desc}</p><div class="price">${t.price}</div><a class="btn order-btn" href="${waLink('Undangan Digital - '+t.name,t.price)}" target="_blank">Pesan Tema Ini</a></article>`).join('');
-  observeReveal();
+
 }
-function initFilters(){
-  const bar = document.querySelector('#filterBar');
-  if(!bar) return;
-  const cats = ['Semua',...new Set(themes.map(t=>t.cat))];
-  bar.innerHTML = cats.map((c,i)=>`<button class="filter-btn ${i===0?'active':''}" data-cat="${c}">${c}</button>`).join('');
-  bar.addEventListener('click',e=>{
-    if(!e.target.matches('.filter-btn')) return;
-    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-    e.target.classList.add('active');
-    renderThemes(e.target.dataset.cat);
-  });
-}
-function observeReveal(){
-  const io = new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('show')})},{threshold:.12});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-}
-renderProducts();initFilters();renderThemes();observeReveal();
+
+loadThemes();
