@@ -1,0 +1,1 @@
+Versi final: logo ZHAFRAN di semua kartu produk, kata-kata dirapikan, foto/video lama tidak disertakan.
