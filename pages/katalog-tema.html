@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Katalog Tema Undangan Digital - ZHAFRAN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <div class="bg-orb orb-1"></div><div class="bg-orb orb-2"></div><div class="print-lines"></div>
+  <header class="site-header">
+    <a class="brand" href="../index.html"><img src="../assets/logo.jpg" alt="Logo"><div><strong>ZHAFRAN</strong><span>Katalog Tema</span></div></a>
+    <nav style="display:flex"><a href="../index.html">Home</a><a class="nav-wa" href="https://wa.me/6285343556117" target="_blank">WhatsApp</a></nav>
+  </header>
+  <main>
+    <section class="section themes-preview" style="padding-top:80px">
+      <div class="section-head reveal show">
+        <span class="eyebrow">Katalog Tema Terpisah</span>
+        <h2>Tema Undangan Digital</h2>
+        <p>Gunakan pencarian dan filter untuk memilih tema. Thumbnail memakai gambar bawaan dari API.</p>
+      </div>
+      <div class="filter-box reveal show">
+        <input id="searchTheme" type="search" placeholder="Cari Tema: Cth. Syari, Biru, Tanpa Foto" />
+        <select id="eventFilter"><option value="all">Filter Berdasarkan Acara</option></select>
+        <select id="styleFilter"><option value="all">Filter Berdasarkan Style</option></select>
+        <select id="colorFilter"><option value="all">Filter Berdasarkan Warna</option></select>
+      </div>
+      <div class="theme-grid" id="themes"></div>
+      <div class="center reveal show">
+        <button class="btn primary" id="loadMoreBtn">Tema Selengkapnya</button>
+      </div>
+    </section>
+  </main>
+  <a class="floating-wa" href="https://wa.me/6285343556117" target="_blank">Pesan</a>
+  <script src="../js/products.js"></script>
+  <script src="../js/main-page.js"></script>
+</body>
+</html>
